@@ -16,9 +16,9 @@ export default function RootLayout({
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
       </head>
-      <body style={{display: "flex", flexDirection: "column", minHeight: "100vh", height: "100%", backgroundColor: "white"}} className={`text-black`}>
+      <body style={{display: "flex", flexDirection: "row", minHeight: "100vh", height: "100%", backgroundColor: "white"}} className={`text-black`}>
         {/* Include the Header and Footer here */}
-        <div className="grid grid-cols-1 max-[600px]:mx-1 mx-5"> 
+        <div className="grid mr-5 w-72"> 
           <Header/>
         </div>
         <main style={{flex : 1}}>{children}</main> {/* Render the content of each page */}

@@ -51,10 +51,10 @@ export default function Header() {
         borderBottomRightRadius: '25px',
         borderBottomLeftRadius: '25px',
       }}
-      className="glass navbar bg-base-100"
+      className="grid grid-rows-3 glass navbar bg-base-100"
     >
       {/* Mobile version */}
-      <div className="navbar-start">
+      <div style={{display: "absolute"}} className="justify-self-start justify-items-center self-start navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -92,10 +92,11 @@ export default function Header() {
       </div>
 
       {/* Desktop version */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+      <div className="grid place-self-center">
+        <ul className="menu menu-vertical px-1">
           {navLinks.map(({ href, label }) => (
-            <li key={href}>
+            <div>
+                <li className='' style={{fontSize: "18px"}} key={href}>
               <Link
                 href={href}
                 style={pathname === href ? activeLinkStyle : linkStyle}
@@ -103,14 +104,17 @@ export default function Header() {
                 {label}
               </Link>
             </li>
+            </div>
+            
           ))}
         
         </ul>
       </div>
 
-      {/* Avatar icon */}
-      <div className="navbar-end">
-        <div className="dropdown dropdown-end">
+      {/* navbar copyright text */}
+      <div className="self-end place-self-center">
+        <div className="dropdown dropdown-end navbar-end">
+            <p>Test</p>
           {/* <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-80 rounded-full">
               <img src="/me.bmp" alt="Photo of me" />

@@ -21,12 +21,13 @@ export default function Home() {
       div.addEventListener("mouseleave", () => {
         anime({
           targets: ".first",
-          translateX: 0,
+          translateX: "500px",
           duration: 500,
           easing: "easeInOutSine",
-        });
-      });
-    });
+          delay: 100,
+        })
+      })
+    })
 
     return () => {
       stack.forEach((div) => {
