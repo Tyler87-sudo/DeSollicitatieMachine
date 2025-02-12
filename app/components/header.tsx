@@ -45,11 +45,11 @@ export default function Header() {
     <div
       style={{
         zIndex: "1",
-        backgroundColor: 'lightyellow',
+        backgroundColor: '#FFF5B4',
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        borderBottomRightRadius: '25px',
-        borderBottomLeftRadius: '25px',
+        borderBottomRightRadius: '20px',
+        borderTopRightRadius: '20px',
       }}
       className="grid grid-rows-3 glass navbar bg-base-100"
     >
