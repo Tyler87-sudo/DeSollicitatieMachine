@@ -29,7 +29,7 @@ export default function Card({
 }) {
   return (
     <div
-      style={outercardstyle || {backgroundColor: "#FFFDD0"}}
+      style={outercardstyle || {backgroundColor: "#FFFDD0", height: "60%"}}
       className={classNames(defaultStyling, className)}
     >
       {hrefimg && (

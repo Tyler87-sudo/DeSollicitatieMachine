@@ -15,16 +15,15 @@ export default function Home() {
       const imageElement = image as HTMLElement;
 
       imageElement.addEventListener("mouseenter", () => {
-        imageElement.style.position = "relative"; // Ensure position is set for zIndex
         imageElement.style.zIndex = "10"; // Increase z-index on hover
 
         anime({
           targets: imageElement,
-          scale: 1.5,
-          keyframes : [
-            {translateX: "0vw"},
-            {translateX: "50vw"},
-          ],
+          scale: 1.1,
+          // keyframes : [
+          //   {translateX: "0px"},
+          //   {translateX: "-50px"},
+          // ],
           duration: 1000,
           easing: "easeInOutSine",
         });
@@ -36,15 +35,16 @@ export default function Home() {
       // Cast image to HTMLElement to access the 'style' property
       const imageElement = image as HTMLElement;
 
+      console.log(image + "test")
+
       imageElement.addEventListener("mouseleave", () => {
         anime({
-          delay: 500,
           targets: imageElement,
           scale: 1,
           duration: 300,
-          keyframes : [
-            {translateX: 0},
-          ],
+          // keyframes : [
+          //   {translateX: 0},
+          // ],
           easing: "easeInOutSine",
           complete: () => {
             imageElement.style.zIndex = "1"; // Reset z-index after animation
@@ -53,18 +53,11 @@ export default function Home() {
       });
     });
 
-    // Clean up event listeners when the component is unmounted
-    return () => {
-      stack.forEach((image) => {
-        const imageElement = image as HTMLElement;
-        imageElement.removeEventListener("mouseenter", () => {});
-        imageElement.removeEventListener("mouseleave", () => {});
-      });
-    };
-  }, []);
+  })
+
 
   return (
-    <div className="box grid grid-rows-1 grid-cols-3">
+    <div className="min-h-screen h-full box grid grid-rows-1">
       <div className="m-3 col-span-3">
         <Card
           outercardstyle={{ height: "100%", backgroundColor: "#FFFDD0"}}

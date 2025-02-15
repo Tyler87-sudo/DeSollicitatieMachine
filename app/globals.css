@@ -19,3 +19,21 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+:root {
+  --vh: 1vh;
+}
+
+body {
+  height: calc(var(--vh) * 100);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  border: 2px solid red;
+}
