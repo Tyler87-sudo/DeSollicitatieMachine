@@ -13,7 +13,7 @@ import { useEffect } from "react";
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const pathname = usePathname(); // Correctly initialize usePathname here
+  const pathname = usePathname();
   useEffect(() => {
     const setVH = () => {
       document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
@@ -30,11 +30,11 @@ export default function RootLayout({
        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
       </head>
       <body style={{backgroundColor: "white", minHeight: "100vh" }} className={"min-h-screen w-full h-full text-black flex flex-row overflow-hidden"}>
-        {/* Include the Header and Footer here */}
+        {/* Include the Header and Footer below this section */}
         <div className="pr-5"> 
           <Header/>
         </div>
-        <main className="flex-grow" style={{}}>{children}</main> {/* Render the content of each page */}
+        <main className="ml-1 mr-1 flex-grow" style={{}}>{children}</main> {/* Renders the content of each page */}
       </body>
     </html>
   );

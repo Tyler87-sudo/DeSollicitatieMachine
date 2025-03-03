@@ -3,62 +3,76 @@
 import { useEffect } from "react";
 import anime from "animejs";
 import Card from "./components/card";
-import ImageBox from "./components/imagebox"; // Your ImageBox component
+import ImageBox from "./components/imagebox";
 
 export default function Home() {
+
+
+  function getCurrentScale(element : HTMLElement) {
+    const style = window.getComputedStyle(element);
+    const transform = style.transform;
+  
+    if (transform === "none") return 1; // Default scale if no transform is applied
+  
+    const matrix = new DOMMatrix(transform); // Parse transform matrix
+    return matrix.a; // 'a' represents scaleX, 'd' represents scaleY
+  }
+  
   useEffect(() => {
-    const stack = document.querySelectorAll(".image");
+    const stack = document.querySelectorAll(".popout");
 
-    // Handle mouseenter
+    let currentAnimation: anime.AnimeInstance | null = null;
+  
     stack.forEach((image) => {
-      // Cast image to HTMLElement to access the 'style' property
       const imageElement = image as HTMLElement;
+      const imagebox = imageElement.querySelector("img") as HTMLImageElement;
 
+      if (currentAnimation) {
+        anime.remove(imageElement) 
+      }
+
+      if (!imagebox) return;
+    
       imageElement.addEventListener("mouseenter", () => {
-        imageElement.style.zIndex = "10"; // Increase z-index on hover
+        if (currentAnimation) {
+          anime.remove(imageElement); 
+        }
+
+        imageElement.style.zIndex = "9999"; 
+        imageElement.style.position = "relative";
+
+        const currentScale = getCurrentScale(imageElement);
+        console.log("Current Scale:", currentScale);
 
         anime({
           targets: imageElement,
-          scale: 1.1,
-          // keyframes : [
-          //   {translateX: "0px"},
-          //   {translateX: "-50px"},
-          // ],
+          scale: [`${currentScale}`, 1.5],
           duration: 1000,
-          easing: "easeInOutSine",
+          easing: "easeInOutQuad",
         });
       });
-    });
-
-    // Handle mouseleave
-    stack.forEach((image) => {
-      // Cast image to HTMLElement to access the 'style' property
-      const imageElement = image as HTMLElement;
-
-      console.log(image + "test")
 
       imageElement.addEventListener("mouseleave", () => {
-        anime({
-          targets: imageElement,
-          scale: 1,
-          duration: 300,
-          // keyframes : [
-          //   {translateX: 0},
-          // ],
-          easing: "easeInOutSine",
-          complete: () => {
-            imageElement.style.zIndex = "1"; // Reset z-index after animation
-          },
-        });
+        
+        imageElement.style.zIndex = "1";
+        const currentScale = getCurrentScale(imageElement);
+        console.log("Current Scale:", currentScale);
+
+          anime({
+            targets: imageElement,
+            scale: [`${currentScale}`, 1.0], 
+            duration: 1000,
+            easing: "easeInOutQuad",
+          });
       });
     });
+  }, []); 
 
-  })
 
 
   return (
     <div className="min-h-screen h-full box grid grid-rows-1">
-      <div className="m-3 col-span-3">
+      <div className="ml-3 mr-3 mt-3 mb-3 col-span-3">
         <Card
           outercardstyle={{ height: "100%", backgroundColor: "#FFFDD0"}}
           title="De Solliciteer Machine"
@@ -68,17 +82,17 @@ export default function Home() {
       </div>
       <div>
         <div className="ml-2 mr-2 p-1">
-          <ImageBox classNames="image" text="Voorbeeld CV" imglink="cv.jpg" />
+          <ImageBox classNames="popout image" text="Voorbeeld CV" imglink="cv.jpg" />
         </div>
       </div>
       <div>
         <div className="ml-2 mr-2 p-1">
-          <ImageBox classNames="image" text="Voorbeeld CV" imglink="cv.jpg" />
+          <ImageBox classNames="popout image" text="Voorbeeld CV" imglink="cv.jpg" />
         </div>
       </div>
       <div>
         <div className="ml-2 mr-2 p-1">
-          <ImageBox classNames="image" text="Voorbeeld CV" imglink="cv.jpg" />
+          <ImageBox classNames="popout image" text="Voorbeeld CV" imglink="cv.jpg" />
         </div>
       </div>
     </div>
